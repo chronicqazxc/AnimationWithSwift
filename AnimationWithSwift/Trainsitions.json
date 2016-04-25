@@ -1,0 +1,12 @@
+{
+    "trainsitions" : [
+                      "TransitionNone",
+                      "TransitionFlipFromLeft",
+                      "TransitionFlipFromRight",
+                      "TransitionCurlUp",
+                      "TransitionCurlDown",
+                      "TransitionCrossDissolve",
+                      "TransitionFlipFromTop",
+                      "TransitionFlipFromBottom",
+    ]
+}

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XVa-Ns-2Fn">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <scenes>
+        <!--Main Table View Controller-->
+        <scene sceneID="o7J-rq-DFB">
+            <objects>
+                <tableViewController id="XVa-Ns-2Fn" customClass="MainTableViewController" customModule="AnimationWithSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="NUF-2D-R4P">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Dr7-if-62Q">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dr7-if-62Q" id="mZz-06-eLr">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="XVa-Ns-2Fn" id="J8D-cM-yLb"/>
+                            <outlet property="delegate" destination="XVa-Ns-2Fn" id="5gW-lS-Q6S"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="faQ-w4-HAt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-364" y="7"/>
+        </scene>
+        <!--Fish Rotate View Controller-->
+        <scene sceneID="Jls-OU-GJV">
+            <objects>
+                <viewController storyboardIdentifier="FishRotateViewController" id="14J-Ux-P9A" customClass="FishRotateViewController" customModule="AnimationWithSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="feA-sN-RkG"/>
+                        <viewControllerLayoutGuide type="bottom" id="EFE-Ub-bhN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="938-qK-4ui">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2co-eI-uMm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="622" y="1068"/>
+        </scene>
+        <!--Fish Swim1 View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="FishSwim1ViewController" id="BYZ-38-t0r" customClass="FishSwim1ViewController" customModule="AnimationWithSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3N-Ns-VRf">
+                                <rect key="frame" x="36" y="557" width="208" height="34.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Number of fish: 10">
+                                        <attributes>
+                                            <color key="NSColor" red="0.11764705882352941" green="0.31764705882352939" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="25" name="Avenir-Book"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="f3N-Ns-VRf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="36" id="JLb-pe-uDA"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="f3N-Ns-VRf" secondAttribute="bottom" constant="8" id="sMw-PJ-AnX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="numberOfFishLabel" destination="f3N-Ns-VRf" id="MYC-ZA-wpf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="622" y="1754"/>
+        </scene>
+        <!--Bezier Path View Controller-->
+        <scene sceneID="U6d-jZ-dEE">
+            <objects>
+                <viewController storyboardIdentifier="BezierPathViewController" id="X36-52-1qP" customClass="BezierPathViewController" customModule="AnimationWithSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cVg-UC-IwQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="KsO-VR-LBb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hcO-aN-hnp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pzo-SG-cOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1233" y="456"/>
+        </scene>
+        <!--Picker View Controller-->
+        <scene sceneID="I8z-mz-R9c">
+            <objects>
+                <viewController storyboardIdentifier="PickerViewController" id="smA-VQ-U6d" customClass="PickerViewController" customModule="AnimationWithSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ym9-WE-Fmx"/>
+                        <viewControllerLayoutGuide type="bottom" id="TgZ-lG-67d"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XLf-er-X3I">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W8H-3l-V6s">
+                                <rect key="frame" x="0.0" y="379" width="600" height="221"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="221" id="LZS-8m-CeR"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="RCE-qr-aGJ" kind="embed" id="6Ou-2M-Zxs"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kus-6Q-LpJ">
+                                <rect key="frame" x="0.0" y="80" width="600" height="299"/>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="W8H-3l-V6s" firstAttribute="leading" secondItem="XLf-er-X3I" secondAttribute="leading" id="FWO-7Y-fJB"/>
+                            <constraint firstItem="W8H-3l-V6s" firstAttribute="top" secondItem="Kus-6Q-LpJ" secondAttribute="bottom" id="bMp-Eb-Xyk"/>
+                            <constraint firstAttribute="trailing" secondItem="W8H-3l-V6s" secondAttribute="trailing" id="blf-vF-gHh"/>
+                            <constraint firstAttribute="trailing" secondItem="Kus-6Q-LpJ" secondAttribute="trailing" id="cMi-RU-kRi"/>
+                            <constraint firstItem="TgZ-lG-67d" firstAttribute="top" secondItem="W8H-3l-V6s" secondAttribute="bottom" id="cg5-WZ-Feu"/>
+                            <constraint firstItem="Kus-6Q-LpJ" firstAttribute="top" secondItem="Ym9-WE-Fmx" secondAttribute="bottom" constant="60" id="fqt-V6-nV2"/>
+                            <constraint firstItem="Kus-6Q-LpJ" firstAttribute="leading" secondItem="XLf-er-X3I" secondAttribute="leading" id="yLM-kh-i6l"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="animateViewContainer" destination="Kus-6Q-LpJ" id="41Q-GF-hY1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tqp-Wy-TcH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="440" y="-109"/>
+        </scene>
+        <!--Trainsition View Controller-->
+        <scene sceneID="LFf-WA-i5B">
+            <objects>
+                <viewController storyboardIdentifier="TrainsitionViewController" id="Bkt-QE-6sy" customClass="TrainsitionViewController" customModule="AnimationWithSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LI6-81-LfT"/>
+                        <viewControllerLayoutGuide type="bottom" id="wIJ-qr-g1A"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="w2H-HN-H0s">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4oV-p8-KaN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1225" y="-242"/>
+        </scene>
+        <!--Slider Controller-->
+        <scene sceneID="SIV-Ie-OIk">
+            <objects>
+                <viewController storyboardIdentifier="WANSliderController" id="3lN-NV-ool" customClass="WANSliderController" customModule="AnimationWithSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Nk-VX-eG7"/>
+                        <viewControllerLayoutGuide type="bottom" id="ODB-vK-rJR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wwi-cn-fou">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="WW0-gC-KA7">
+                                <rect key="frame" x="8" y="13" width="584" height="31"/>
+                                <connections>
+                                    <action selector="sliderValueChange:" destination="3lN-NV-ool" eventType="valueChanged" id="VpL-b2-TOk"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="WW0-gC-KA7" secondAttribute="trailing" constant="10" id="YTp-Yz-qhb"/>
+                            <constraint firstItem="WW0-gC-KA7" firstAttribute="leading" secondItem="wwi-cn-fou" secondAttribute="leading" constant="10" id="a5w-la-E96"/>
+                            <constraint firstAttribute="bottom" secondItem="WW0-gC-KA7" secondAttribute="bottom" constant="20" id="iMP-JU-fBb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="numberOfFishSlider" destination="WW0-gC-KA7" id="swi-tk-k7r"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SlA-My-pGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-185" y="1808.5"/>
+        </scene>
+        <!--Picker View Controller-->
+        <scene sceneID="ZWN-VO-S63">
+            <objects>
+                <viewController storyboardIdentifier="WANPickerViewController" id="RCE-qr-aGJ" customClass="WANPickerViewController" customModule="AnimationWithSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wmf-rs-631"/>
+                        <viewControllerLayoutGuide type="bottom" id="b3N-N4-x6R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jo8-6A-4Tb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="221"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFo-2M-ubX">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="221"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="mFo-2M-ubX" secondAttribute="trailing" id="AUG-WS-h4g"/>
+                            <constraint firstItem="mFo-2M-ubX" firstAttribute="top" secondItem="jo8-6A-4Tb" secondAttribute="top" id="Qbi-9B-2px"/>
+                            <constraint firstItem="mFo-2M-ubX" firstAttribute="leading" secondItem="jo8-6A-4Tb" secondAttribute="leading" id="cvZ-S3-QSq"/>
+                            <constraint firstAttribute="bottom" secondItem="mFo-2M-ubX" secondAttribute="bottom" id="iTI-Nr-1XX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="animatePicker" destination="mFo-2M-ubX" id="oUC-3m-iCJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oge-2b-103" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="440" y="449.5"/>
+        </scene>
+        <!--Slider View Controller-->
+        <scene sceneID="hCe-8w-IcI">
+            <objects>
+                <viewController storyboardIdentifier="SliderViewController" id="EXb-PE-ApS" customClass="SliderViewController" customModule="AnimationWithSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="au7-Ac-0oh"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Ik-fY-Cxq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6fp-TX-Rkg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pgg-C5-y3z">
+                                <rect key="frame" x="0.0" y="537" width="600" height="63"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="63" id="tOX-cD-bal"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="3lN-NV-ool" kind="embed" identifier="WANSliderController" id="Asg-RA-ygH"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcW-bb-EWt">
+                                <rect key="frame" x="0.0" y="60" width="600" height="480"/>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vcW-bb-EWt" secondAttribute="trailing" id="5iy-vm-YdY"/>
+                            <constraint firstAttribute="trailing" secondItem="Pgg-C5-y3z" secondAttribute="trailing" id="DH0-yA-yez"/>
+                            <constraint firstItem="vcW-bb-EWt" firstAttribute="top" secondItem="6fp-TX-Rkg" secondAttribute="top" constant="60" id="fN6-VA-LzR"/>
+                            <constraint firstItem="Pgg-C5-y3z" firstAttribute="leading" secondItem="6fp-TX-Rkg" secondAttribute="leading" id="fpm-XC-9bQ"/>
+                            <constraint firstItem="vcW-bb-EWt" firstAttribute="leading" secondItem="6fp-TX-Rkg" secondAttribute="leading" id="sep-6z-Ijy"/>
+                            <constraint firstItem="Pgg-C5-y3z" firstAttribute="top" secondItem="vcW-bb-EWt" secondAttribute="bottom" constant="-3" id="teS-MD-mqm"/>
+                            <constraint firstItem="0Ik-fY-Cxq" firstAttribute="top" secondItem="Pgg-C5-y3z" secondAttribute="bottom" id="vaE-Y4-fgd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="vcW-bb-EWt" id="1O1-TQ-f6O"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pQJ-Nh-sSZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-185" y="1334"/>
+        </scene>
+    </scenes>
+</document>

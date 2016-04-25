@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Demos</key>
+	<array>
+		<dict>
+            <key>Display</key>
+            <string>FishSwim</string>
+            <key>Container</key>
+            <string>SliderViewController</string>
+            <key>Controller</key>
+            <string>FishSwim1ViewController</string>
+		</dict>
+		<dict>
+            <key>Display</key>
+            <string>FishSwim2</string>
+            <key>Container</key>
+            <string>SliderViewController</string>
+            <key>Controller</key>
+            <string>BezierPathViewController</string>
+		</dict>
+		<dict>
+            <key>Display</key>
+            <string>Trainsition</string>
+            <key>Container</key>
+            <string>PickerViewController</string>
+            <key>Controller</key>
+            <string>TrainsitionViewController</string>
+		</dict>
+		<dict>
+            <key>Display</key>
+            <string>FishRotate</string>
+            <key>Container</key>
+            <string>PickerViewController</string>
+            <key>Controller</key>
+            <string>FishRotateViewController</string>
+		</dict>
+        <dict>
+            <key>Display</key>
+            <string>Draw</string>
+            <key>Container</key>
+            <string>PickerViewController</string>
+            <key>Controller</key>
+            <string>BezierPathViewController</string>
+        </dict>
+	</array>
+</dict>
+</plist>
