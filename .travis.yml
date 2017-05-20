@@ -1,6 +1,6 @@
 language: swift
 osx_image: xcode8.2.1
-xcode_project: AnimationWithSwift.xcodeproj
-xcode_scheme: AnimationWithSwift
-# script:
- # - xcodebuild -scheme AnimationWithSwift -project AnimationWithSwift.xcodeproj -sdk iphonesimulator -configuration Debug clean build
+#xcode_project: AnimationWithSwift.xcodeproj
+#xcode_scheme: AnimationWithSwift
+ script:
+  - xcodebuild -scheme AnimationWithSwift -project AnimationWithSwift.xcodeproj -sdk iphoneos -configuration Debug clean build

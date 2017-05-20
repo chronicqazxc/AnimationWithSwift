@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wayne Hsiao. -ND. All rights reserved.
 //
 
-import UIKi
+import UIKit
 
 protocol BaseViewControllerProtocol {
     mutating func animate(_ sender: AnyObject)
