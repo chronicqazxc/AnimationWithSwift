@@ -9,17 +9,17 @@
 import UIKit
 
 protocol BaseViewControllerProtocol {
-    mutating func animate(sender: AnyObject)
+    mutating func animate(_ sender: AnyObject)
 }
 
 class BaseViewController: UIViewController, BaseViewControllerProtocol {
     
-    private var toolbar: UIToolbar?
-    private var animateButton: UIButton?
-    private var currentViewControllerString: String?
-    private var currentViewController: UIViewController?
+    fileprivate var toolbar: UIToolbar?
+    fileprivate var animateButton: UIButton?
+    fileprivate var currentViewControllerString: String?
+    fileprivate var currentViewController: UIViewController?
     
-    func destination(destination: UIViewController, let currentViewControllerString: String) {
+    func destination(_ destination: UIViewController, currentViewControllerString: String) {
             self.currentViewControllerString = currentViewControllerString
         
             currentViewController = destination
@@ -27,35 +27,35 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        toolbar = UIToolbar(frame: CGRectZero)
-        let backButton = UIBarButtonItem(barButtonSystemItem: .Stop, target: self, action: Selector("back"))
-        let animateButton = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: Selector("animate:"))
-        let space = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        toolbar = UIToolbar(frame: CGRect.zero)
+        let backButton = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(BaseViewController.back))
+        let animateButton = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(BaseViewController.animate(_:)))
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
         toolbar!.items = [space, backButton, space, animateButton, space]
-        self.toolbar!.frame = CGRect(x: 0, y: 0, width: CGRectGetWidth(UIScreen.mainScreen().bounds), height: 44)        
+        self.toolbar!.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44)        
         self.view.addSubview(toolbar!)
     }
     
     func back() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func animate(sender: AnyObject) {
+    func animate(_ sender: AnyObject) {
         
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 }
 
 protocol WANSliderControllerDelegateProtocol {
-    mutating func sliderValueChange(sender: AnyObject)
+    mutating func sliderValueChange(_ sender: AnyObject)
 }
 
 class WANSliderController: UIViewController {
-    private weak var _delegate: AnyObject?
+    fileprivate weak var _delegate: AnyObject?
     var delegate: AnyObject? {
         set {
             if let _ = newValue as? WANSliderControllerDelegateProtocol {
@@ -72,28 +72,28 @@ class WANSliderController: UIViewController {
     }
     @IBOutlet weak var numberOfFishSlider: UISlider!
     
-    @IBAction func sliderValueChange(sender: AnyObject) {
+    @IBAction func sliderValueChange(_ sender: AnyObject) {
         delegate?.sliderValueChange(sender)
     }
 }
 
 class SliderViewController: BaseViewController, WANSliderControllerDelegateProtocol {
     
-    private var slider: UISlider?
+    fileprivate var slider: UISlider?
     @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewControllerWithIdentifier(currentViewControllerString!)
+        let viewController = storyboard.instantiateViewController(withIdentifier: currentViewControllerString!)
         viewController.view.frame = containerView.bounds
         containerView.addSubview(viewController.view)
         self.addChildViewController(viewController)
-        viewController.didMoveToParentViewController(self)
+        viewController.didMove(toParentViewController: self)
         
         for childViewController in childViewControllers {
-            if NSStringFromClass(childViewController.classForCoder).componentsSeparatedByString(".").last! == "WANSliderController" {
+            if NSStringFromClass(childViewController.classForCoder).components(separatedBy: ".").last! == "WANSliderController" {
                 let sliderViewController = childViewController as? WANSliderController
                 sliderViewController!.delegate = self
                 slider = sliderViewController!.numberOfFishSlider
@@ -102,14 +102,14 @@ class SliderViewController: BaseViewController, WANSliderControllerDelegateProto
         }
         
         for childViewController in childViewControllers {
-            let childViewControllerString = NSStringFromClass(childViewController.classForCoder).componentsSeparatedByString(".").last!
+            let childViewControllerString = NSStringFromClass(childViewController.classForCoder).components(separatedBy: ".").last!
             if childViewControllerString == currentViewControllerString {
                 currentViewController = childViewController
                 
-                if childViewController.respondsToSelector(Selector("adjustSlider:")) {
-                    currentViewController!.performSelectorOnMainThread(Selector("adjustSlider:"), withObject: slider, waitUntilDone: false)
+                if childViewController.responds(to: Selector("adjustSlider:")) {
+                    currentViewController!.performSelector(onMainThread: Selector("adjustSlider:"), with: slider, waitUntilDone: false)
                 } else {
-                    slider!.hidden = true
+                    slider!.isHidden = true
                 }
                 
                 break
@@ -117,19 +117,19 @@ class SliderViewController: BaseViewController, WANSliderControllerDelegateProto
         }
     }
     
-    override func animate(sender: AnyObject) {
-        if currentViewController!.respondsToSelector(Selector("animate:")) {
-            currentViewController!.performSelectorOnMainThread(Selector("animate:"), withObject: sender, waitUntilDone: false)
+    override func animate(_ sender: AnyObject) {
+        if currentViewController!.responds(to: #selector(BaseViewController.animate(_:))) {
+            currentViewController!.performSelector(onMainThread: #selector(BaseViewController.animate(_:)), with: sender, waitUntilDone: false)
         }
     }
     
-    func sliderValueChange(sender: AnyObject) {
-        if currentViewController!.respondsToSelector(Selector("sliderValueChange:")) {
-            currentViewController!.performSelectorOnMainThread(Selector("sliderValueChange:"), withObject: sender, waitUntilDone: false)
+    func sliderValueChange(_ sender: AnyObject) {
+        if currentViewController!.responds(to: #selector(WANSliderController.sliderValueChange(_:))) {
+            currentViewController!.performSelector(onMainThread: #selector(WANSliderController.sliderValueChange(_:)), with: sender, waitUntilDone: false)
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
     }
 }
@@ -139,17 +139,17 @@ class WANPickerViewController: UIViewController {
 }
 
 protocol PickerViewControllerProtocol {
-    mutating func numberOfComponentsInPickerView(pickerView: UIPickerView) -> NSNumber
-    mutating func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: NSNumber) -> NSNumber
-    mutating func pickerViewAttributedTitleForRow(row: NSNumber, forComponent component: NSNumber) -> NSAttributedString
-    mutating func pickerViewDidSelectRow(row: NSNumber, inComponent component: NSNumber)
-    mutating func getPickerView(pickerView: UIPickerView)
+    mutating func numberOfComponentsInPickerView(_ pickerView: UIPickerView) -> NSNumber
+    mutating func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: NSNumber) -> NSNumber
+    mutating func pickerViewAttributedTitleForRow(_ row: NSNumber, forComponent component: NSNumber) -> NSAttributedString
+    mutating func pickerViewDidSelectRow(_ row: NSNumber, inComponent component: NSNumber)
+    mutating func getPickerView(_ pickerView: UIPickerView)
 }
 
 class PickerViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet weak var animateViewContainer: UIView!
     var picker: UIPickerView?
-    private weak var _delegate: AnyObject?
+    fileprivate weak var _delegate: AnyObject?
     
     var delegate: AnyObject? {
         get {
@@ -158,8 +158,8 @@ class PickerViewController: BaseViewController, UIPickerViewDataSource, UIPicker
         
         set {
             _delegate = newValue
-            if newValue!.respondsToSelector(Selector("getPickerView:")) {
-                newValue!.performSelector(Selector("getPickerView:"), withObject: picker)
+            if newValue!.responds(to: Selector("getPickerView:")) {
+                newValue!.perform(Selector("getPickerView:"), with: picker)
             }
         }
     }
@@ -168,14 +168,14 @@ class PickerViewController: BaseViewController, UIPickerViewDataSource, UIPicker
         super.viewDidLoad()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewControllerWithIdentifier(currentViewControllerString!)
+        let viewController = storyboard.instantiateViewController(withIdentifier: currentViewControllerString!)
         viewController.view.frame = animateViewContainer.bounds
         animateViewContainer.addSubview(viewController.view)
         self.addChildViewController(viewController)
-        viewController.didMoveToParentViewController(self)
+        viewController.didMove(toParentViewController: self)
         
         for childViewController in childViewControllers {
-            if NSStringFromClass(childViewController.classForCoder).componentsSeparatedByString(".").last! == "WANPickerViewController" {
+            if NSStringFromClass(childViewController.classForCoder).components(separatedBy: ".").last! == "WANPickerViewController" {
                 let pickerViewController = childViewController as? WANPickerViewController
                 picker = pickerViewController!.animatePicker
                 picker!.dataSource = self
@@ -185,7 +185,7 @@ class PickerViewController: BaseViewController, UIPickerViewDataSource, UIPicker
         }
         
         for childViewController in childViewControllers {
-            let childViewControllerString = NSStringFromClass(childViewController.classForCoder).componentsSeparatedByString(".").last!
+            let childViewControllerString = NSStringFromClass(childViewController.classForCoder).components(separatedBy: ".").last!
             if childViewControllerString == currentViewControllerString {
                 currentViewController = childViewController
                 delegate = currentViewController
@@ -194,29 +194,29 @@ class PickerViewController: BaseViewController, UIPickerViewDataSource, UIPicker
         }
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        if currentViewController!.respondsToSelector(Selector("numberOfComponentsInPickerView:")) {
-            let value: Unmanaged<AnyObject> = currentViewController!.performSelector(Selector("numberOfComponentsInPickerView:"), withObject: pickerView)
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        if currentViewController!.responds(to: #selector(UIPickerViewDataSource.numberOfComponents(in:))) {
+            let value: Unmanaged<AnyObject> = currentViewController!.perform(#selector(UIPickerViewDataSource.numberOfComponents(in:)), with: pickerView)
             let valueNumber = value.takeUnretainedValue() as! NSNumber
-            return valueNumber.integerValue
+            return valueNumber.intValue
         } else {
             return 0
         }
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if currentViewController!.respondsToSelector(Selector("pickerView:numberOfRowsInComponent:")) {
-            let value: Unmanaged<AnyObject> = currentViewController!.performSelector(Selector("pickerView:numberOfRowsInComponent:"), withObject: pickerView, withObject:NSNumber(integer: component))
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if currentViewController!.responds(to: #selector(UIPickerViewDataSource.pickerView(_:numberOfRowsInComponent:))) {
+            let value: Unmanaged<AnyObject> = currentViewController!.perform(#selector(UIPickerViewDataSource.pickerView(_:numberOfRowsInComponent:)), with: pickerView, with:NSNumber(value: component as Int))
             let valueNumber = value.takeUnretainedValue() as! NSNumber
-            return valueNumber.integerValue
+            return valueNumber.intValue
         } else {
             return 0
         }
     }
     
-    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        if currentViewController!.respondsToSelector(Selector("pickerViewAttributedTitleForRow:forComponent:")) {
-            let value: Unmanaged<AnyObject> = currentViewController!.performSelector(Selector("pickerViewAttributedTitleForRow:forComponent:"), withObject: NSNumber(integer: row), withObject: NSNumber(integer: component))
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        if currentViewController!.responds(to: Selector("pickerViewAttributedTitleForRow:forComponent:")) {
+            let value: Unmanaged<AnyObject> = currentViewController!.perform(Selector("pickerViewAttributedTitleForRow:forComponent:"), with: NSNumber(value: row as Int), with: NSNumber(value: component as Int))
             let title = value.takeUnretainedValue() as? NSAttributedString
             print(title)
             return title
@@ -225,15 +225,15 @@ class PickerViewController: BaseViewController, UIPickerViewDataSource, UIPicker
         }
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if currentViewController!.respondsToSelector(Selector("pickerViewDidSelectRow:inComponent:")) {
-            currentViewController!.performSelector(Selector("pickerViewDidSelectRow:inComponent:"), withObject: NSNumber(integer: row), withObject: NSNumber(integer: component))
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if currentViewController!.responds(to: Selector("pickerViewDidSelectRow:inComponent:")) {
+            currentViewController!.perform(Selector("pickerViewDidSelectRow:inComponent:"), with: NSNumber(value: row as Int), with: NSNumber(value: component as Int))
         }
     }
     
-    override func animate(sender: AnyObject) {
-        if currentViewController!.respondsToSelector(Selector("animate:")) {
-            currentViewController!.performSelectorOnMainThread(Selector("animate:"), withObject: sender, waitUntilDone: false)
+    override func animate(_ sender: AnyObject) {
+        if currentViewController!.responds(to: #selector(BaseViewController.animate(_:))) {
+            currentViewController!.performSelector(onMainThread: #selector(BaseViewController.animate(_:)), with: sender, waitUntilDone: false)
         }
     }
 }

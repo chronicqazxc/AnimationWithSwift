@@ -10,32 +10,34 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     
-    private var demoList: NSArray? = [String]()
+    typealias DemoList = [[AnyHashable : Any]]
+    
+    fileprivate var demoList: DemoList?
     
     override func viewDidLoad() {
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            let finalPath = NSBundle.mainBundle().pathForResource("DemoList", ofType: "plist")
-            let dictionaryResult = NSDictionary(contentsOfFile: finalPath!)
-            let demoList: NSArray? = dictionaryResult!["Demos"] as? NSArray
-            dispatch_async(dispatch_get_main_queue(), {
-                NSNotificationCenter.defaultCenter().postNotificationName("DemoListLoaded", object: nil, userInfo: ["DemoList":dictionaryResult!])
-                self.demoList = demoList
-                self.tableView.reloadData()
-            });
-        });
+        let globalQueue = DispatchQueue.global()
+        globalQueue.async { [weak self] in
+            guard let strongself = self else { return }
+            guard let finalPath = Bundle.main.path(forResource: "DemoList", ofType: "plist") else { return }
+            guard let dictionaryResult = NSDictionary(contentsOfFile: finalPath) else { return }
+            guard let demoList = dictionaryResult["Demos"] as? DemoList else { return }
+            strongself.demoList = demoList
+            strongself.tableView.reloadData()
+        }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.demoList!.count
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let demoList = demoList else { return 0 }
+        return demoList.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("Cell")
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "Cell")
         if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: "Cell")
+            cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
         }
         
         cell.textLabel!.attributedText = NSAttributedString(string: (demoList![indexPath.row]["Display"] as! String), attributes: [NSFontAttributeName:UIFont(name: "Avenir-Roman", size: 25.0)!,
@@ -44,20 +46,20 @@ class MainTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let title = demoList![indexPath.row]["Display"] as! String
         print("\(title) clicked!")
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         let viewControllerIdentifier = demoList![indexPath.row]["Container"] as? String
         let currentViewControllerIdentifier = demoList![indexPath.row]["Controller"] as? String
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewControllerWithIdentifier(viewControllerIdentifier!) as! BaseViewController
+        let viewController = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier!) as! BaseViewController
         viewController.destination(viewController, currentViewControllerString: currentViewControllerIdentifier!)
 
-        self.presentViewController(viewController, animated: true, completion: nil)
+        present(viewController, animated: true, completion: nil)
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 }

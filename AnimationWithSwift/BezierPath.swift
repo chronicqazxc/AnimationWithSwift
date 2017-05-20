@@ -10,17 +10,17 @@ import UIKit
 
 class BezierPathViewController: UIViewController, PickerViewControllerProtocol {
     
-    private let demos = ["Fish swim", "Draw circle"]
-    private var picker: UIPickerView?
-    lazy private var ovalView: UIView = {
+    fileprivate let demos = ["Fish swim", "Draw circle"]
+    fileprivate var picker: UIPickerView?
+    lazy fileprivate var ovalView: UIView = {
         let selfView = self.view
-        let ovalView:UIView = UIView(frame: selfView.frame)
-        ovalView.backgroundColor = UIColor.whiteColor()
+        let ovalView:UIView = UIView(frame: selfView!.frame)
+        ovalView.backgroundColor = UIColor.white
         return ovalView
     }()
     
-    private func fishesByAmount(amount: Int) -> [UIImageView?] {
-        var fishes = [UIImageView?](count: amount, repeatedValue: nil)
+    fileprivate func fishesByAmount(_ amount: Int) -> [UIImageView?] {
+        var fishes = [UIImageView?](repeating: nil, count: amount)
         var fishIndex = 0
         for _ in 0...amount-1 {
             let size:CGFloat = CGFloat(arc4random_uniform(40)+20)
@@ -31,13 +31,13 @@ class BezierPathViewController: UIViewController, PickerViewControllerProtocol {
         return fishes
     }
     
-    private func fishViewWithRect(rect: CGRect) -> UIImageView {
+    fileprivate func fishViewWithRect(_ rect: CGRect) -> UIImageView {
         let fishView = UIImageView(image: UIImage.init(named: "blue-fish"))
         fishView.frame = rect
         return fishView
     }
     
-    private var fishes: [UIImageView?] = []
+    fileprivate var fishes: [UIImageView?] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,12 +45,12 @@ class BezierPathViewController: UIViewController, PickerViewControllerProtocol {
         for fish in fishes {
             self.view.addSubview(fish!)
         }
-        self.view.layer.contents = UIImage(named: "ocean.jpg")!.CGImage
+        self.view.layer.contents = UIImage(named: "ocean.jpg")!.cgImage
     }
     
-    func animate(sender: AnyObject) {
+    func animate(_ sender: AnyObject) {
         if picker != nil {
-            let selectedRow = picker!.selectedRowInComponent(0)
+            let selectedRow = picker!.selectedRow(inComponent: 0)
             if selectedRow == 0 {
                 for fish in fishes {
                     swimFish(fish!)
@@ -65,33 +65,33 @@ class BezierPathViewController: UIViewController, PickerViewControllerProtocol {
         }
     }
     
-    private func swimFish(fish: UIImageView) {
+    fileprivate func swimFish(_ fish: UIImageView) {
         let path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: CGRectGetMinX(fish.frame), y: CGRectGetMinY(fish.frame)))
-        path.addCurveToPoint(CGPoint(x: CGRectGetWidth(self.view.bounds)+CGRectGetWidth(fish.bounds), y: 239), controlPoint1: CGPoint(x: 136, y: 373), controlPoint2: CGPoint(x: 178, y: 110))
+        path.move(to: CGPoint(x: fish.frame.minX, y: fish.frame.minY))
+        path.addCurve(to: CGPoint(x: self.view.bounds.width+fish.bounds.width, y: 239), controlPoint1: CGPoint(x: 136, y: 373), controlPoint2: CGPoint(x: 178, y: 110))
         
         let anim = CAKeyframeAnimation(keyPath: "position")
-        anim.path = path.CGPath
+        anim.path = path.cgPath
         anim.duration = Double(arc4random_uniform(40) + 30) / 10
         anim.timeOffset = Double(arc4random_uniform(290))
         anim.rotationMode = kCAAnimationRotateAuto
         anim.repeatCount = Float.infinity
         
-        fish.layer.addAnimation(anim, forKey: "animate position along path")
+        fish.layer.add(anim, forKey: "animate position along path")
     }
     
-    private func drawOval() {
+    fileprivate func drawOval() {
         let ovalStartAngle = CGFloat(90.01 * M_PI/180)
         let ovalEndAngle = CGFloat(90 * M_PI/180)
-        let ovalRect = CGRectMake(200, 200, 125, 125)
+        let ovalRect = CGRect(x: 200, y: 200, width: 125, height: 125)
         
         let ovalPath = UIBezierPath()
-        ovalPath.addArcWithCenter(CGPointMake(CGRectGetMidX(ovalRect), CGRectGetMidY(ovalRect)), radius: CGRectGetWidth(ovalRect) / 2, startAngle: ovalStartAngle, endAngle: ovalEndAngle, clockwise: true)
+        ovalPath.addArc(withCenter: CGPoint(x: ovalRect.midX, y: ovalRect.midY), radius: ovalRect.width / 2, startAngle: ovalStartAngle, endAngle: ovalEndAngle, clockwise: true)
         
         let progressLine = CAShapeLayer()
-        progressLine.path = ovalPath.CGPath
-        progressLine.strokeColor = UIColor ( red: 0.2472, green: 0.3113, blue: 0.9965, alpha: 1.0 ).CGColor
-        progressLine.fillColor = UIColor.clearColor().CGColor
+        progressLine.path = ovalPath.cgPath
+        progressLine.strokeColor = UIColor ( red: 0.2472, green: 0.3113, blue: 0.9965, alpha: 1.0 ).cgColor
+        progressLine.fillColor = UIColor.clear.cgColor
         progressLine.lineWidth = 10.0
         progressLine.lineCap = kCALineCapRound
         
@@ -102,28 +102,28 @@ class BezierPathViewController: UIViewController, PickerViewControllerProtocol {
         animateStrokeEnd.fromValue = 0.0
         animateStrokeEnd.toValue = 1.0
         
-        progressLine.addAnimation(animateStrokeEnd, forKey: "animate stroke")
+        progressLine.add(animateStrokeEnd, forKey: "animate stroke")
         
     }
     
-    private func stopFish(fish: UIImageView) {
-        fish.layer.removeAnimationForKey("animate position along path")
+    fileprivate func stopFish(_ fish: UIImageView) {
+        fish.layer.removeAnimation(forKey: "animate position along path")
     }
     
 // MARK: PickerViewControllerProtocol
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> NSNumber {
-        return NSNumber(integer: 1)
+    func numberOfComponentsInPickerView(_ pickerView: UIPickerView) -> NSNumber {
+        return NSNumber(value: 1 as Int)
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: NSNumber) -> NSNumber {
-        return NSNumber(integer: 2)
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: NSNumber) -> NSNumber {
+        return NSNumber(value: 2 as Int)
     }
     
-    func pickerViewAttributedTitleForRow(row: NSNumber, forComponent component: NSNumber) -> NSAttributedString {
-        return NSAttributedString(string: demos[row.integerValue] , attributes: [NSFontAttributeName:UIFont(name: "Avenir-Roman", size: 20.0)!])
+    func pickerViewAttributedTitleForRow(_ row: NSNumber, forComponent component: NSNumber) -> NSAttributedString {
+        return NSAttributedString(string: demos[row.intValue] , attributes: [NSFontAttributeName:UIFont(name: "Avenir-Roman", size: 20.0)!])
     }
     
-    func pickerViewDidSelectRow(row: NSNumber, inComponent component: NSNumber) {
+    func pickerViewDidSelectRow(_ row: NSNumber, inComponent component: NSNumber) {
         if row == 0 {
             configureForFish()
         } else {
@@ -131,18 +131,18 @@ class BezierPathViewController: UIViewController, PickerViewControllerProtocol {
         }
     }
     
-    func getPickerView(pickerView: UIPickerView) {
+    func getPickerView(_ pickerView: UIPickerView) {
         picker = pickerView
     }
     
     func configureForFish() {
         let theAnim = CABasicAnimation(keyPath: "contents")
         theAnim.fromValue = self.view.layer.contents
-        theAnim.toValue = UIImage(named: "ocean.jpg")!.CGImage
+        theAnim.toValue = UIImage(named: "ocean.jpg")!.cgImage
         theAnim.duration = 2.0;
-        self.view.layer.addAnimation(theAnim, forKey: "AnimateFrame")
+        self.view.layer.add(theAnim, forKey: "AnimateFrame")
         
-        UIView.performSystemAnimation(.Delete, onViews: [ovalView], options: UIViewAnimationOptions.AllowAnimatedContent, animations: { () -> Void in
+        UIView.perform(.delete, on: [ovalView], options: UIViewAnimationOptions.allowAnimatedContent, animations: { () -> Void in
             
             }) { (bool: Bool) -> Void in
                 
@@ -154,7 +154,7 @@ class BezierPathViewController: UIViewController, PickerViewControllerProtocol {
             stopFish(fish!)
         }
         ovalView = UIView(frame: self.view.frame)
-        ovalView.backgroundColor = UIColor.whiteColor()
+        ovalView.backgroundColor = UIColor.white
         view.addSubview(ovalView)
     }
 }
