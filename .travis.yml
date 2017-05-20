@@ -1,3 +1,4 @@
 language: swift
-xcode_project: AnimationWithSwift.xcodeproj # path to your xcodeproj folder
-xcode_scheme: AnimationWithSwift
+osx_image: xcode8.2.1
+script:
+ - xcodebuild -scheme AnimationWithSwift -project AnimationWithSwift.xcodeproj -sdk iphonesimulator -configuration Debug clean build test
