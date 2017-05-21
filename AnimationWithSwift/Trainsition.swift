@@ -9,48 +9,48 @@
 import UIKit
 
 class ColoredView: UIView {
-    private let kBackgroundColor = "BackgroundColor"
+    fileprivate let kBackgroundColor = "BackgroundColor"
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.backgroundColor = aDecoder.decodeObjectForKey(kBackgroundColor) as? UIColor
+        self.backgroundColor = aDecoder.decodeObject(forKey: kBackgroundColor) as? UIColor
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    override func isEqual(object: AnyObject?) -> Bool {
-        return object!.backgroundColor == self.backgroundColor
+    override func isEqual(_ object: Any?) -> Bool {
+        return (object! as AnyObject).backgroundColor == self.backgroundColor
     }
     
-    override func encodeWithCoder(aCoder: NSCoder) {
-        super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(self.backgroundColor, forKey: kBackgroundColor)
+    override func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
+        aCoder.encode(self.backgroundColor, forKey: kBackgroundColor)
     }
 }
 
 extension UIViewAnimationOptions {
-    static func animationForKey(key: String) -> UIViewAnimationOptions? {
+    static func animationForKey(_ key: String) -> UIViewAnimationOptions? {
         switch key {
         case "TransitionNone":
-            return .TransitionNone
+            return UIViewAnimationOptions()
         case "TransitionFlipFromLeft":
-            return .TransitionFlipFromLeft
+            return .transitionFlipFromLeft
         case "TransitionFlipFromRight":
-            return .TransitionFlipFromRight
+            return .transitionFlipFromRight
         case "TransitionCurlUp":
-            return .TransitionCurlUp
+            return .transitionCurlUp
         case "TransitionCurlDown":
-            return .TransitionCurlDown
+            return .transitionCurlDown
         case "TransitionCrossDissolve":
-            return .TransitionCrossDissolve
+            return .transitionCrossDissolve
         case "TransitionFlipFromTop":
-            return .TransitionFlipFromTop
+            return .transitionFlipFromTop
         case "TransitionFlipFromBottom":
-            return .TransitionFlipFromBottom
+            return .transitionFlipFromBottom
         default:
-            return .TransitionNone
+            return UIViewAnimationOptions()
         }
     }
 }
@@ -62,7 +62,7 @@ class TrainsitionViewController: UIViewController {
         case blueView
     }
     
-    private var animatePicker:UIPickerView? {
+    fileprivate var animatePicker:UIPickerView? {
         
         get {
             var viewController: WANPickerViewController? = nil
@@ -78,41 +78,41 @@ class TrainsitionViewController: UIViewController {
         
     }
     
-    private var currentView: UIView?
+    fileprivate var currentView: UIView?
     
-    lazy private var transitionOptions: UIViewAnimationOptions? = {
-        return UIViewAnimationOptions.TransitionNone
+    lazy fileprivate var transitionOptions: UIViewAnimationOptions? = {
+        return UIViewAnimationOptions()
     }()
     
     let kCurlCurrentView: String = "CurlCurrentView"
     static let kCurlCurrentView: String = "CurlCurrentView"
     
-    lazy private var containerView: UIView = {
+    lazy fileprivate var containerView: UIView = {
         var tempContainerView = UIView(frame: CGRect(x: 60, y: 60, width: 200, height: 200))
         return tempContainerView
     }()
     
-    lazy private var redSquare: ColoredView = {
+    lazy fileprivate var redSquare: ColoredView = {
         var tempContainerView = ColoredView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-        tempContainerView.backgroundColor = UIColor.redColor()
+        tempContainerView.backgroundColor = UIColor.red
         return tempContainerView
     }()
     
-    lazy private var blueSquare: ColoredView = {
+    lazy fileprivate var blueSquare: ColoredView = {
         var tempContainerView = ColoredView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-        tempContainerView.backgroundColor = UIColor.blueColor()
+        tempContainerView.backgroundColor = UIColor.blue
         return tempContainerView
     }()
     
-    lazy private var currentValue:ColoredView? = {
-        let userDefault: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let encodedObject: NSData? = userDefault.objectForKey(kCurlCurrentView) as? NSData
+    lazy fileprivate var currentValue:ColoredView? = {
+        let userDefault: UserDefaults = UserDefaults.standard
+        let encodedObject: Data? = userDefault.object(forKey: kCurlCurrentView) as? Data
         if encodedObject == nil {
             let currentView = ColoredView()
-            currentView.backgroundColor = UIColor.redColor()
+            currentView.backgroundColor = UIColor.red
             return currentView
         } else {
-            return NSKeyedUnarchiver.unarchiveObjectWithData(encodedObject!) as? ColoredView
+            return NSKeyedUnarchiver.unarchiveObject(with: encodedObject!) as? ColoredView
         }
     }()
     
@@ -135,18 +135,18 @@ class TrainsitionViewController: UIViewController {
         }
     }
     
-    func animate(sender: AnyObject) {
+    func animate(_ sender: AnyObject) {
         
         let button: UIBarButtonItem = sender as! UIBarButtonItem
-        button.enabled = false
+        button.isEnabled = false
         
         let views = viewsTuple()
-        UIView.transitionWithView(containerView, duration: 1.0, options: transitionOptions!, animations: { () -> Void in
+        UIView.transition(with: containerView, duration: 1.0, options: transitionOptions!, animations: { () -> Void in
             views.frontView.removeFromSuperview()
             self.containerView.addSubview(views.backView)
             })
             { (finish: Bool) -> Void in
-                button.enabled = true
+                button.isEnabled = true
                 if (views.backView == self.blueSquare) {
                     self.currentValue = self.blueSquare
                 } else {
@@ -164,26 +164,26 @@ class TrainsitionViewController: UIViewController {
     }
     
     func saveCurrentViewToUserDefault() {
-        let userDefault: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefault: UserDefaults = UserDefaults.standard
         var saveValue: AnyObject?
         if (currentValue!.isEqual(redSquare)) {
-            saveValue = NSKeyedArchiver.archivedDataWithRootObject(redSquare)
+            saveValue = NSKeyedArchiver.archivedData(withRootObject: redSquare) as AnyObject?
         } else {
-            saveValue = NSKeyedArchiver.archivedDataWithRootObject(blueSquare)
+            saveValue = NSKeyedArchiver.archivedData(withRootObject: blueSquare) as AnyObject?
         }
         
         
-        userDefault.setObject(saveValue, forKey: kCurlCurrentView)
+        userDefault.set(saveValue, forKey: kCurlCurrentView)
         userDefault.synchronize()
     }
     
-    lazy private var trainsitions: NSArray = {
-        let finalPath = NSBundle.mainBundle().pathForResource("Trainsitions", ofType: "json")
-        let jsonData = NSData(contentsOfFile: finalPath!)
+    lazy fileprivate var trainsitions: NSArray = {
+        let finalPath = Bundle.main.path(forResource: "Trainsitions", ofType: "json")
+        let jsonData = try? Data(contentsOf: URL(fileURLWithPath: finalPath!))
         var jsonDic: NSDictionary?
         var trainsitions: NSArray?
         do {
-            jsonDic = try NSJSONSerialization.JSONObjectWithData(jsonData!, options: .MutableContainers) as? NSDictionary
+            jsonDic = try JSONSerialization.jsonObject(with: jsonData!, options: .mutableContainers) as? NSDictionary
             trainsitions = jsonDic!["trainsitions"] as? NSArray
         } catch {
             print("error")
@@ -193,19 +193,19 @@ class TrainsitionViewController: UIViewController {
     
 // MARK: PickerViewControllerProtocol
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> NSNumber {
-        return NSNumber(integer: 1)
+    func numberOfComponentsInPickerView(_ pickerView: UIPickerView) -> NSNumber {
+        return NSNumber(value: 1 as Int)
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: NSNumber) -> NSNumber {
-        return NSNumber(integer: trainsitions.count)
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: NSNumber) -> NSNumber {
+        return NSNumber(value: trainsitions.count as Int)
     }
     
-    func pickerViewAttributedTitleForRow(row: NSNumber, forComponent component: NSNumber) -> NSAttributedString? {
-        return NSAttributedString(string: trainsitions[row.integerValue] as! String, attributes: [NSFontAttributeName:UIFont(name: "Avenir-Roman", size: 20.0)!])
+    func pickerViewAttributedTitleForRow(_ row: NSNumber, forComponent component: NSNumber) -> NSAttributedString? {
+        return NSAttributedString(string: trainsitions[row.intValue] as! String, attributes: [NSFontAttributeName:UIFont(name: "Avenir-Roman", size: 20.0)!])
     }
     
-    func pickerViewDidSelectRow(row: NSNumber, inComponent component: NSNumber) {
-        transitionOptions = UIViewAnimationOptions.animationForKey(trainsitions[row.integerValue] as! String)
+    func pickerViewDidSelectRow(_ row: NSNumber, inComponent component: NSNumber) {
+        transitionOptions = UIViewAnimationOptions.animationForKey(trainsitions[row.intValue] as! String)
     }
 }

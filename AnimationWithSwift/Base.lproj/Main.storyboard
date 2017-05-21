@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XVa-Ns-2Fn">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="XVa-Ns-2Fn">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Main Table View Controller-->
@@ -10,15 +14,15 @@
             <objects>
                 <tableViewController id="XVa-Ns-2Fn" customClass="MainTableViewController" customModule="AnimationWithSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="NUF-2D-R4P">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Dr7-if-62Q">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dr7-if-62Q" id="mZz-06-eLr">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -42,9 +46,9 @@
                         <viewControllerLayoutGuide type="bottom" id="EFE-Ub-bhN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="938-qK-4ui">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2co-eI-uMm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -60,15 +64,15 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3N-Ns-VRf">
-                                <rect key="frame" x="36" y="557" width="208" height="34.5"/>
+                                <rect key="frame" x="36" y="624.5" width="208" height="34.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Number of fish: 10">
                                         <attributes>
-                                            <color key="NSColor" red="0.11764705882352941" green="0.31764705882352939" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="NSColor" red="0.11764705882352941" green="0.31764705882352939" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="25" name="Avenir-Book"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -77,7 +81,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="f3N-Ns-VRf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="36" id="JLb-pe-uDA"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="f3N-Ns-VRf" secondAttribute="bottom" constant="8" id="sMw-PJ-AnX"/>
@@ -100,9 +104,9 @@
                         <viewControllerLayoutGuide type="bottom" id="KsO-VR-LBb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hcO-aN-hnp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pzo-SG-cOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -118,11 +122,11 @@
                         <viewControllerLayoutGuide type="bottom" id="TgZ-lG-67d"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XLf-er-X3I">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W8H-3l-V6s">
-                                <rect key="frame" x="0.0" y="379" width="600" height="221"/>
+                                <rect key="frame" x="0.0" y="446" width="375" height="221"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="221" id="LZS-8m-CeR"/>
                                 </constraints>
@@ -131,10 +135,10 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kus-6Q-LpJ">
-                                <rect key="frame" x="0.0" y="80" width="600" height="299"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="366"/>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="W8H-3l-V6s" firstAttribute="leading" secondItem="XLf-er-X3I" secondAttribute="leading" id="FWO-7Y-fJB"/>
                             <constraint firstItem="W8H-3l-V6s" firstAttribute="top" secondItem="Kus-6Q-LpJ" secondAttribute="bottom" id="bMp-Eb-Xyk"/>
@@ -162,9 +166,9 @@
                         <viewControllerLayoutGuide type="bottom" id="wIJ-qr-g1A"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="w2H-HN-H0s">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4oV-p8-KaN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -180,11 +184,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ODB-vK-rJR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wwi-cn-fou">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="63"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="1" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="WW0-gC-KA7">
-                                <rect key="frame" x="8" y="13" width="584" height="31"/>
+                                <rect key="frame" x="8" y="13" width="359" height="31"/>
                                 <connections>
                                     <action selector="sliderValueChange:" destination="3lN-NV-ool" eventType="valueChanged" id="VpL-b2-TOk"/>
                                 </connections>
@@ -213,14 +217,14 @@
                         <viewControllerLayoutGuide type="bottom" id="b3N-N4-x6R"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jo8-6A-4Tb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="221"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="221"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFo-2M-ubX">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="221"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="221"/>
                             </pickerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="mFo-2M-ubX" secondAttribute="trailing" id="AUG-WS-h4g"/>
                             <constraint firstItem="mFo-2M-ubX" firstAttribute="top" secondItem="jo8-6A-4Tb" secondAttribute="top" id="Qbi-9B-2px"/>
@@ -245,11 +249,11 @@
                         <viewControllerLayoutGuide type="bottom" id="0Ik-fY-Cxq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6fp-TX-Rkg">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pgg-C5-y3z">
-                                <rect key="frame" x="0.0" y="537" width="600" height="63"/>
+                                <rect key="frame" x="0.0" y="604" width="375" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="tOX-cD-bal"/>
                                 </constraints>
@@ -258,10 +262,10 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcW-bb-EWt">
-                                <rect key="frame" x="0.0" y="60" width="600" height="480"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="547"/>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="vcW-bb-EWt" secondAttribute="trailing" id="5iy-vm-YdY"/>
                             <constraint firstAttribute="trailing" secondItem="Pgg-C5-y3z" secondAttribute="trailing" id="DH0-yA-yez"/>

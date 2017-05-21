@@ -16,12 +16,12 @@ class FishSwim1ViewController: UIViewController {
     
     @IBOutlet weak var numberOfFishLabel: UILabel!
 
-    private var currentValue: NSNumber?
+    fileprivate var currentValue: NSNumber?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        let userDefault: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        currentValue = userDefault.objectForKey(kSliderValueKey) as? NSNumber
+        let userDefault: UserDefaults = UserDefaults.standard
+        currentValue = userDefault.object(forKey: kSliderValueKey) as? NSNumber
     }
     
     deinit {
@@ -46,9 +46,14 @@ class FishSwim1ViewController: UIViewController {
 //        }
 //    }
     
-    func adjustSlider(sender: UISlider) {
-        sender.setValue(Float(currentValue!), animated: true)
-        setNumberOfFishLabelWithValue(currentValue!.floatValue)
+    func adjustSlider(_ sender: UISlider) {
+        guard let currentValue = currentValue else {
+            sender.setValue(Float(0), animated: true)
+            setNumberOfFishLabelWithValue(Float(0))
+            return
+        }
+        sender.setValue(Float(currentValue), animated: true)
+        setNumberOfFishLabelWithValue(currentValue.floatValue)
     }
     
     override func viewDidLoad() {
@@ -63,20 +68,20 @@ class FishSwim1ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func sliderValueChange(sender: UISlider) {
+    func sliderValueChange(_ sender: UISlider) {
         setNumberOfFishLabelWithValue(sender.value)
-        currentValue = NSNumber(integer: Int(sender.value))
+        currentValue = NSNumber(value: Int(sender.value) as Int)
     }
     
     func saveCurrentValue() {
-        let userDefault: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let value = NSNumber(integer: currentValue!.integerValue)
-        userDefault.setObject(value, forKey: kSliderValueKey)
+        let userDefault: UserDefaults = UserDefaults.standard
+        let value = NSNumber(value: currentValue!.intValue as Int)
+        userDefault.set(value, forKey: kSliderValueKey)
         userDefault.synchronize()
     }
     
-    func animate(sender: AnyObject?) {
-        for _ in 1...currentValue!.integerValue {
+    func animate(_ sender: AnyObject?) {
+        for _ in 1...currentValue!.intValue {
             fishSwim()
         }
     }
@@ -88,13 +93,13 @@ class FishSwim1ViewController: UIViewController {
         let fish = fishViewWithRect(CGRect(x:0-size, y: yPosition, width: size, height: size))
         self.view.addSubview(fish)
         
-        let delay = NSTimeInterval(900 + arc4random_uniform(1000)) / 1000  // 1 - 1.9
+        let delay = TimeInterval(900 + arc4random_uniform(1000)) / 1000  // 1 - 1.9
         
-        UIView.animateWithDuration(1.0,
+        UIView.animate(withDuration: 1.0,
             delay:delay,
-            options:[UIViewAnimationOptions.CurveLinear],
+            options:[UIViewAnimationOptions.curveLinear],
             animations: { () -> Void in
-                fish.frame = CGRect(x:CGRectGetWidth(UIScreen.mainScreen().bounds)+size, y: yPosition, width: size, height: size)
+                fish.frame = CGRect(x:UIScreen.main.bounds.width+size, y: yPosition, width: size, height: size)
             },
             completion:
             { (bool: Bool) -> Void in
@@ -103,13 +108,14 @@ class FishSwim1ViewController: UIViewController {
         )
     }
     
-    func setNumberOfFishLabelWithValue(var value: Float?) {
+    func setNumberOfFishLabelWithValue(_ value: Float?) {
+        var value = value
         value = value ?? 0
         let attributedText = NSAttributedString(string: "Number of fishes: \(Int(value!))", attributes: [NSFontAttributeName:UIFont(name: numberOfFishLabel.font.fontName, size: 25.0)!])
         numberOfFishLabel.attributedText = attributedText
     }
     
-    func fishViewWithRect(rect: CGRect) -> UIImageView {
+    func fishViewWithRect(_ rect: CGRect) -> UIImageView {
         let fishView = UIImageView(image: UIImage.init(named: "blue-fish"))
         fishView.frame = rect
         return fishView
