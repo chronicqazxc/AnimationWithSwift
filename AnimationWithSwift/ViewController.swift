@@ -45,9 +45,9 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
         
     }
     
-    override var prefersStatusBarHidden : Bool {
-        return true
-    }
+    //override var prefersStatusBarHidden : Bool {
+    //    return true
+    //}
 }
 
 protocol WANSliderControllerDelegateProtocol {

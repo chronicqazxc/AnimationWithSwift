@@ -59,7 +59,7 @@ class MainTableViewController: UITableViewController {
         present(viewController, animated: true, completion: nil)
     }
     
-    override var prefersStatusBarHidden : Bool {
-        return true
-    }
+    //override var prefersStatusBarHidden : Bool {
+    //    return true
+    //}
 }
