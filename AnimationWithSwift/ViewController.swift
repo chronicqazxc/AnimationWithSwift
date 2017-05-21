@@ -105,9 +105,9 @@ class SliderViewController: BaseViewController, WANSliderControllerDelegateProto
             let childViewControllerString = NSStringFromClass(childViewController.classForCoder).components(separatedBy: ".").last!
             if childViewControllerString == currentViewControllerString {
                 currentViewController = childViewController
-                
-                if childViewController.responds(to: Selector("adjustSlider:")) {
-                    currentViewController!.performSelector(onMainThread: Selector("adjustSlider:"), with: slider, waitUntilDone: false)
+                let selector = NSSelectorFromString("adjustSlider:")
+                if childViewController.responds(to: selector) {
+                    currentViewController!.performSelector(onMainThread: selector, with: slider, waitUntilDone: false)
                 } else {
                     slider!.isHidden = true
                 }
@@ -158,8 +158,9 @@ class PickerViewController: BaseViewController, UIPickerViewDataSource, UIPicker
         
         set {
             _delegate = newValue
-            if newValue!.responds(to: Selector("getPickerView:")) {
-                newValue!.perform(Selector("getPickerView:"), with: picker)
+            let selector = NSSelectorFromString("getPickerView:")
+            if newValue!.responds(to: selector) {
+                newValue!.perform(selector, with: picker)
             }
         }
     }
@@ -215,10 +216,10 @@ class PickerViewController: BaseViewController, UIPickerViewDataSource, UIPicker
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        if currentViewController!.responds(to: Selector("pickerViewAttributedTitleForRow:forComponent:")) {
-            let value: Unmanaged<AnyObject> = currentViewController!.perform(Selector("pickerViewAttributedTitleForRow:forComponent:"), with: NSNumber(value: row as Int), with: NSNumber(value: component as Int))
+        let selector = NSSelectorFromString("pickerViewAttributedTitleForRow:forComponent:")
+        if currentViewController!.responds(to: selector) {
+            let value: Unmanaged<AnyObject> = currentViewController!.perform(selector, with: NSNumber(value: row as Int), with: NSNumber(value: component as Int))
             let title = value.takeUnretainedValue() as? NSAttributedString
-            print(title)
             return title
         } else {
             return NSAttributedString(string: "", attributes: [NSFontAttributeName:UIFont(name: "Avenir-Roman", size: 25.0)!])
@@ -226,8 +227,9 @@ class PickerViewController: BaseViewController, UIPickerViewDataSource, UIPicker
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if currentViewController!.responds(to: Selector("pickerViewDidSelectRow:inComponent:")) {
-            currentViewController!.perform(Selector("pickerViewDidSelectRow:inComponent:"), with: NSNumber(value: row as Int), with: NSNumber(value: component as Int))
+        let selector = NSSelectorFromString("pickerViewDidSelectRow:inComponent:")
+        if currentViewController!.responds(to: selector) {
+            currentViewController!.perform(selector, with: NSNumber(value: row as Int), with: NSNumber(value: component as Int))
         }
     }
     
