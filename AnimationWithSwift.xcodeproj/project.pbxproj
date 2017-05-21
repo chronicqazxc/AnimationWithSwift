@@ -220,6 +220,7 @@
 				TargetAttributes = {
 					01C094C31CBBC26F00ACE602 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 94MBHXKUB6;
 						LastSwiftMigration = 0820;
 					};
 					01C094D71CBBC26F00ACE602 = {
@@ -437,6 +438,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 94MBHXKUB6;
 				INFOPLIST_FILE = AnimationWithSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wayne.AnimationWithSwift;
@@ -450,6 +452,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 94MBHXKUB6;
 				INFOPLIST_FILE = AnimationWithSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wayne.AnimationWithSwift;
