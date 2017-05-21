@@ -1,7 +1,6 @@
-language: swift
+language: objective-c
 osx_image: xcode8.2.1
 xcode_project: AnimationWithSwift.xcodeproj
 xcode_scheme: AnimationWithSwift
-build
 # script:
  # - xcodebuild -scheme AnimationWithSwift -project AnimationWithSwift.xcodeproj -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6s,OS=9.3' clean build
